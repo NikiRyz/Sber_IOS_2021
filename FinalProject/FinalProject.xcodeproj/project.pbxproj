@@ -21,6 +21,8 @@
 		FD2AB3A3269D951100C05A4D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2AB3A2269D951100C05A4D /* BaseViewController.swift */; };
 		FD2AB3A8269DE24000C05A4D /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2AB3A7269DE24000C05A4D /* Label.swift */; };
 		FD2AB3AD269ED15600C05A4D /* SecondScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2AB3AC269ED15600C05A4D /* SecondScreen.swift */; };
+		FD2AB3D5269F923D00C05A4D /* GifCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2AB3D4269F923D00C05A4D /* GifCell.swift */; };
+		FD2AB3DA269FAE0000C05A4D /* GiphyNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2AB3D9269FAE0000C05A4D /* GiphyNetworkService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,8 @@
 		FD2AB3A2269D951100C05A4D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		FD2AB3A7269DE24000C05A4D /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		FD2AB3AC269ED15600C05A4D /* SecondScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondScreen.swift; sourceTree = "<group>"; };
+		FD2AB3D4269F923D00C05A4D /* GifCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GifCell.swift; sourceTree = "<group>"; };
+		FD2AB3D9269FAE0000C05A4D /* GiphyNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiphyNetworkService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +151,7 @@
 				FD2AB388269D882A00C05A4D /* NetworkServiceError.swift */,
 				FD2AB393269D892D00C05A4D /* GetRandomGifResponse.swift */,
 				FD2AB398269D8DD400C05A4D /* GiphyNetworkServiceProtocol.swift */,
+				FD2AB3D9269FAE0000C05A4D /* GiphyNetworkService.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				FD2AB3A7269DE24000C05A4D /* Label.swift */,
+				FD2AB3D4269F923D00C05A4D /* GifCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -300,11 +306,13 @@
 			files = (
 				FD2AB340269D74D100C05A4D /* ViewController.swift in Sources */,
 				FD2AB384269D786D00C05A4D /* Const.swift in Sources */,
+				FD2AB3D5269F923D00C05A4D /* GifCell.swift in Sources */,
 				FD2AB399269D8DD400C05A4D /* GiphyNetworkServiceProtocol.swift in Sources */,
 				FD2AB33C269D74D100C05A4D /* AppDelegate.swift in Sources */,
 				FD2AB39E269D942200C05A4D /* SpinnerViewController.swift in Sources */,
 				FD2AB3AD269ED15600C05A4D /* SecondScreen.swift in Sources */,
 				FD2AB3A3269D951100C05A4D /* BaseViewController.swift in Sources */,
+				FD2AB3DA269FAE0000C05A4D /* GiphyNetworkService.swift in Sources */,
 				FD2AB389269D882A00C05A4D /* NetworkServiceError.swift in Sources */,
 				FD2AB346269D74D100C05A4D /* FinalProject.xcdatamodeld in Sources */,
 				FD2AB3A8269DE24000C05A4D /* Label.swift in Sources */,

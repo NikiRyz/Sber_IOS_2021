@@ -7,12 +7,30 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+final class ViewController: BaseViewController {
+    
+    private let networkService: GiphyNetworkServiceProtocol
+    
+    init(networkService: GiphyNetworkServiceProtocol) {
+        self.networkService = networkService
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private var url: String?
     lazy var info: Label={
         let view = Label(text: "На случай важных переговоров")
         return view
     }()
+    
+    lazy var img: GifCell={
+        let view = GifCell(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
+        return view
+    }()
+    
     func myButton(){
         let button = UIButton(frame: CGRect(x: view.frame.size.width/2 - 80, y:
                                                 view.frame.size.height/1.5, width: 160, height: 50))
@@ -21,29 +39,70 @@ class ViewController: UIViewController {
         button.backgroundColor = .gray
         button.layer.cornerRadius = 12
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        
     }
+    
+    private var dataSource = [Url]()
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let img = UIImageView(frame: CGRect(x: view.frame.size.width/2 - 100, y:
-                                                view.frame.size.height/3.5, width: 200, height: 200))
-        let url = URL(string:"https://media2.giphy.com/media/1j0LPmZFAekLWiQ0/200_d.gif?cid=e3b0c442c9f75367a3b4a3394939e98c3ab1a1ecebd35f15&rid=200_d.gif&ct=g")
-            if let data = try? Data(contentsOf: url!)
-            {
-                img.image = UIImage(data: data)
-            }
-        img.contentMode = .scaleAspectFit
-        self.view.addSubview(img)
-        
+        configureUI()
+        loadData()
+        }
+    
+    deinit {
+        print("ViewController deinit")
+    }
+    
+    
+    private func configureUI() {
         view.backgroundColor = .white
         myButton()
+        view.addSubview(img)
         view.addSubview(info)
+    }
+
+    private func loadData() {
+        isLoading = true
+        networkService.getData{ self.process($0) }
         }
+
+    private func process(_ response: GetRandomGifAPIResponse) {
+        DispatchQueue.main.async {
+            switch response {
+            case .success(let data):
+                self.url = data.data.images.fixedHeightSmall.url
+            case .failure(let error):
+                self.showAlert(for: error)
+            }
+            self.isLoading = false
+        }
+    }
+    
+    private func showAlert(for error: NetworkServiceError) {
+            let alert = UIAlertController(title: "Опаньки, что-то пошло не так",
+                                          message: message(for: error),
+                                          preferredStyle: .alert)
+            present(alert, animated: true)
+        }
+
+        private func message(for error: NetworkServiceError) -> String {
+            switch error {
+            case .network:
+                return "Упал запрос"
+            case .decodable:
+                return "Не смогли распарсить"
+            case .unknown:
+                return "Хз, что произошло, но обязательно разберемся"
+
+            }
+        }
+    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         info.center = view.center
         info.frame = .init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height-UIScreen.main.bounds.height/2)
+        img.frame = .init(x: view.frame.size.width/2 - 75, y: view.frame.size.height/3, width: 150, height: 150)
     }
 
 }
@@ -51,6 +110,6 @@ class ViewController: UIViewController {
 extension ViewController {
     @objc func buttonTapped() {
         let secondScreen = SecondScreen()
-        navigationController?.pushViewController(secondScreen, animated: true)
+        navigationController?.present(secondScreen, animated: false)
     }
 }

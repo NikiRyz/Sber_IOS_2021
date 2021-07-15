@@ -10,5 +10,6 @@ import Foundation
 typealias GetRandomGifAPIResponse = Result<GetRandomGifResponse, NetworkServiceError>
 
 protocol GiphyNetworkServiceProtocol {
-    func getGiphy(after cursor: String?, completion: @escaping (GetRandomGifAPIResponse) -> Void)
+    func getData(with completion: @escaping (GetRandomGifAPIResponse) -> Void)
+    func loadImage(imageUrl: String, completion: @escaping (Data?) -> Void)
 }

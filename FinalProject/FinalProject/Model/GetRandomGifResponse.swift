@@ -7,13 +7,13 @@
 
 
 struct GetRandomGifResponse: Decodable{
-    let data:[ResponseData]
-    let meta:[ResponseMeta]
+    let data:ResponseData
+    let meta:ResponseMeta
 }
 
 struct ResponseData: Decodable{
     let title: String
-    let images: [ResponseDataImg]
+    let images: ResponseDataImg
 }
 
 struct ResponseMeta: Decodable{
@@ -22,10 +22,11 @@ struct ResponseMeta: Decodable{
 }
 
 struct ResponseDataImg: Decodable{
-    let fixedHeightSmall: [Url]
+    let fixedHeightSmall: Url
 }
 
 struct Url: Decodable{
     let url: String
 }
  
+
